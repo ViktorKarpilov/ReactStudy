@@ -1,5 +1,3 @@
-import { useId } from "react"
-
 interface LabelProps{
   text: string,
   color: string, 
