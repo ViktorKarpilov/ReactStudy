@@ -3,10 +3,13 @@
 // quesrySelector to get the todo-list element
 // tamplate string to create the li element
 // use const or let to declare variables
+// initialize with hardcoded tasks
 
 document.addEventListener("DOMContentLoaded", () => {
     const todoList = document.querySelector('#todo-list');
     const addTodoInput = document.getElementById("add-todo-input");
+
+    const initialTasks = ["Eat", "Drink", "Sleep"];
 
     function addTask(name) {
         const li = document.createElement('li');
@@ -36,4 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             deleteTask(event.target);
         }
     });
+
+    // Initialize with hardcoded tasks
+    initialTasks.forEach(task => addTask(task));
 });
