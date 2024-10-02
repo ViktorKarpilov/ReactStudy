@@ -49,7 +49,7 @@ li.clicked {
 	text-decoration: line-through;
 }
 
-input#addToDo {
+input#add-todo-input {
 	font-size: 18px;
 	color: #2980b9;
 	background: #b7eeff;
@@ -61,7 +61,7 @@ input#addToDo {
 	-moz-border-box: border-box;
 }
 
-input#addToDo:focus {
+input#add-todo-input:focus {
 	background: white;
 	border: 2px solid skyblue;
 	outline: none;
