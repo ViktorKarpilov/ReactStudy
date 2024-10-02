@@ -5,11 +5,11 @@ function AddTask(name){
                     "</li>";
 
     var created = div.firstChild;
-    created.firstChild.addEventListener("click", () => DeleteTask(created.firstChild))
-    document.getElementsByTagName("ul")[0].append(created);
+    created.firstChild.addEventListener("click", () => deleteTask(created.firstChild))
+    document.querySelector('#todo-list').append(created);
 }
 
-function DeleteTask(element) {
+function deleteTask(element) {
     element.parentElement.remove();
 }
 
@@ -21,5 +21,5 @@ document.getElementById("addToDo").addEventListener("keypress", (event) => {
 
 var trashIcons = document.getElementsByClassName("fa-trash");
 Array.prototype.forEach.call(trashIcons, function(icon) {
-    icon.parentElement.addEventListener("click", () => DeleteTask(icon.parentElement));
+    icon.parentElement.addEventListener("click", () => deleteTask(icon.parentElement));
 });
