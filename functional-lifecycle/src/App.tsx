@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
+
 import Label from './label';
-import ButtonsWindow from './buttonsWindow';
+import ButtonsWindow from './ButtonsWindow';
+import { LabelList } from './LabelList';
 
 function App() {
-  var [mounted, setMount] = useState(false);
-  var [labels, setLabels] = useState<React.ReactElement[]>([]);
+  const [mounted, setMount] = useState(false);
+  const [labels, setLabels] = useState<React.ReactElement[]>([]);
+  const [, forceRerender] = useState({});
 
   useEffect(() => {
-    setLabels([...labels, <Label text="App mounted" color="green"/>]);
-  }, [])
+    setLabels((current) => [...current, <Label text="App mounted" color="green" />]);
+  }, []);
 
-  const addLabelCallback = (element:React.ReactElement) => {
-    setLabels([...labels, element])
-  }
+  const addLabelCallback = (element: React.ReactElement) => {
+    setLabels([...labels, element]);
+  };
 
   const toggleButtonWindow = () => {
     setMount(!mounted);
-  }
+    setLabels([]);
+  };
 
-  const labelElements = labels.map(label => <li>{label}</li>);
-  
+  console.log('## == <App /> rendered == ##');
+
+  // const memoizedAddLabelCallback = useCallback((text: string) =>
+  //   setLabels((current) =>
+  //     [...current, <Label text={text} color="blue"/>]),
+  //   []);
+
+  const regularAddLabelCallback = (text: string) =>
+    setLabels((current) => [...current, <Label text={text} color="blue" />]);
+
   return (
     <div className="App">
-      <br/>
+      <br />
+      <button onClick={() => {
+        forceRerender({})
+        }}> Test rerender </button>
+      <br />
       <button onClick={toggleButtonWindow}> Mount/Unmount window </button>
-      <br/>
-      {mounted && <ButtonsWindow addLabelCallback={addLabelCallback}/>}
-      <ul>
-        {labelElements}
-      </ul>
+      <br />
+      {mounted && <ButtonsWindow addLabelCallback={addLabelCallback} />}
+      <LabelList labels={labels} onUpdated={regularAddLabelCallback} />
     </div>
   );
 }
