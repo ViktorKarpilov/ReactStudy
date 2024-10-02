@@ -10,6 +10,11 @@ interface LabelListProps {
   onUpdated: (text: string) => any;
 }
 
+// New items:
+// - treck update lifecycle
+// - useLayoutEffect vs useEffect
+// - memo: memoization of the component
+
 const BaseLabelList = ({ labels, onUpdated }: LabelListProps) => {
   const renderCount = useRef(0);
   renderCount.current++;
